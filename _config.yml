@@ -28,7 +28,7 @@ twitter_username: vrangan
 github_username:  vr2045
 
 # Build settings
-theme: jekyll-theme-cayman
+theme: minima
 plugins:
   - jekyll-feed
 
