@@ -1,14 +1,17 @@
 ---
 layout: post
-title: "Magic Smoke"
-date: 2021-12-29
-categories: upduino power
+title: "Magic Smoke and PTC's"
+date: 2021-12-31
+categories: upduino power PTC
 ---
 
 ## Background
 
-@stevenbell teaches a course in Introductory Digital Engineering at Tufts University and has bought many UPduino's. He suggested that the ferrite bead be replaced with a [PTC](https://www.digikey.com/en/products/detail/bourns-inc/MF-FSMF035X-2/2039255) as he was seeing students shorting out their boards.
+@stevenbell teaches a course in Introductory Digital Engineering at Tufts University and has bought many [UPduino's][the_upduino]. He suggested that the ferrite bead be replaced with a [PTC][the_ptc] as he was seeing students shorting out their boards leading to burning out the ferrite bead.
 
+If true, this is a pretty worrisome failure as the board is used by makers as well as students for introductory engineering courses, many of whom are novices and would likely end up with a similar failure.
+
+The ferrite bead is circled in red below.
 ![UPduino Ferrite bead schematic](/assets/images/magic-smoke/upduino_ferrite_bead_schematic.png)
 
 This was a bit surprising to me as I had always assumed that the USB power was limited to 500mA per the spec and it was the job of the PC or USB power source to handle overcurrent and trip accordingly. 
@@ -47,11 +50,15 @@ How about shorting the output? What happens to the energy in the output capacito
 ![Shorting a 5V 0.5A power supply](/assets/images/magic-smoke/shorting_ps_output.png)
 Very similar behavior as above so it appears that a lab power supply will not cause damage to the ferrite bead that we're seeing when the UPduino is plugged into a USB port.
 
-# Adding a PTC
+# Adding a [PTC][the_ptc]
 
-Since we've proven that significant irriversible damage occurs to the ferrite bead under short circuit, we would like to fix this with a PTC. PTC's are positive temperature coefficient revices, also known as self-resetting fuses. When a large current passes through the PTC, it heats up and undergoes a material phase change at a specific temperature. This new phase has a higher resistance as compared to the low temperature material phase. The current passing through the PTC in this phase keeps the PTC at a high enough temperature to maintain the higher resistance phase.
+Since we've proven that significant irriversible damage occurs to the ferrite bead under short circuit of the 5V when powered by a PC USB hub, we would like to fix this so its not a permanent failure. A PTC comes to mind.
 
-Heres what happens with the UPduino with the ferrite bead replaced by the PTC.
+PTC's are positive temperature coefficient devices, also known as self-resetting fuses. When a large current passes through the PTC, it heats up and undergoes a material phase change at a specific temperature. This new phase has a significantly higher resistance as compared to the low temperature material phase. The current passing through the PTC in this phase keeps the PTC at a high enough temperature to maintain the higher resistance phase by positive feedback.
+
+Once current is interrupted, this material cools down and changes to the lower resistance phase which is normal operation and so is self resetting assuming the current is interrupted externally.
+
+Heres what happens with the UPduino with the ferrite bead replaced by [the PTC][the_ptc].
 ![Shorting with PTC on UPduino](/assets/images/magic-smoke/shorting_with_ptc.png)
 
 Heres the zoomed in version where we see that the PTC trips within 2 ms, limiting energy going into the short circuit.
@@ -76,3 +83,8 @@ A PTC is a great addition to a USB design which might be subjected to short circ
 * Acroname 4 port powered USB hub
 * Siglent SPD3303X-E power supply
 * Custom built PC with Windows 10
+* [PTC][the_ptc]
+* [UPduino 3.0][the_upduino]
+
+[the_ptc]: https://www.digikey.com/en/products/detail/bourns-inc/MF-FSMF035X-2/2039255
+[the_upduino]: https://www.tindie.com/products/tinyvision_ai/upduino-v30-low-cost-lattice-ice40-fpga-board/
