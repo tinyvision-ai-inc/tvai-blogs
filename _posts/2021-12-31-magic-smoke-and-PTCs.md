@@ -1,9 +1,17 @@
 ---
-layout: post
+layout: default
 title: "Magic Smoke and PTC's"
 date: 2021-12-31
 categories: upduino power PTC
+comments: true
 ---
+
+<h2 class="post_title">
+  {{ page.title }}
+  {% if page.date %}
+    <small>{{ page.date | date_to_string }}</small>
+  {% endif %}
+</h2>
 
 ## Background
 
@@ -88,3 +96,5 @@ A PTC is a great addition to a USB design which might be subjected to short circ
 
 [the_ptc]: https://www.digikey.com/en/products/detail/bourns-inc/MF-FSMF035X-2/2039255
 [the_upduino]: https://www.tindie.com/products/tinyvision_ai/upduino-v30-low-cost-lattice-ice40-fpga-board/
+
+{% include disqus.html %}
